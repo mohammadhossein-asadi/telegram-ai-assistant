@@ -18,7 +18,7 @@
   },
   "start": {
     "welcome": "👋 سلام {name}!\n\nمن دستیار هوش مصنوعی دوزبانه‌ی شما هستم — فارسی و انگلیسی، با کنترل کامل روی شخصیت، حافظه و مدل‌ها.\n\nاز منوی زیر شروع کنید.",
-    "welcome_back": "👋 خوش برگشتی، نامه9!",
+    "welcome_back": "👋 خوش برگشتی، {name}!",
     "onboarding": "🌐 لطفاً زبان خود را انتخاب کنید\n\nPlease choose your language",
     "lang_set": "✅ زبان به فارسی تغییر کرد.",
     "dev_credit": "ساخته‌شده با ❤️ توسط {developer}",
@@ -212,7 +212,7 @@
     "stats_body": "👥 کاربران: {users}\n🚫 مسدود: {blocked}\n📚 گفتگوها: {convs}\n💬 پیام‌ها: {messages}\n🔌 درخواست‌های هوش مصنوعی: {requests}\n📅 فعال امروز: {active}",
     "broadcast": "📢 ارسال همگانی",
     "broadcast_ask": "پیام ارسال همگانی را بفرستید.\nبرای لغو /cancel را بفرستید.",
-    "broadcast_done": "📢 پیام برای {count} کاربر ارجال شد.",
+    "broadcast_done": "📢 پیام برای {count} کاربر ارسال شد.",
     "providers": "🔌 ارائه‌دهندگان هوش مصنوعی",
     "add_provider": "➕ افزودن ارائه‌دهنده",
     "add_provider_hint": "اطلاعات را این‌طور بفرستید: name | base_url | model | api_key",
