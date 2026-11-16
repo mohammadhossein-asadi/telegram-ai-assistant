@@ -1,8 +1,10 @@
-version: '3.8'
 services:
   bot:
     build: .
-    env_file: .env
+    restart: unless-stopped
+    env_file:
+      - .env
     volumes:
       - ./data:/app/data
-    restart: unless-stopped
+    environment:
+      DATABASE_URL: sqlite+aiosqlite:///./data/bot.db
