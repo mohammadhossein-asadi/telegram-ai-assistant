@@ -29,12 +29,14 @@ class Database:
     def _ensure_sqlite_dir(url: str) -> None:
         if not url.startswith("sqlite"):
             return
+        # sqlite+aiosqlite:///./data/bot.db  ->  ./data/bot.db
         _, _, path = url.partition("///")
         if path and path != ":memory:":
             Path(path).expanduser().resolve().parent.mkdir(parents=True, exist_ok=True)
 
     async def create_all(self) -> None:
-        from database import models
+        # Import models so they register on Base.metadata before create_all.
+        from database import models  # noqa: F401
 
         async with self.engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
