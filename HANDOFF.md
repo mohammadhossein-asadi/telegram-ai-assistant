@@ -15,11 +15,11 @@
 | Automated tests | 32 passing (`pytest -q`), offline |
 | Documentation package | complete (`docs/`, `artifacts/`, `prompts/`, `skills/`, `templates/`, `manifest/`) |
 | Live verification | **not done** — no bot token or AI key available here |
-| Working tree | documentation added (untracked) + one source fix (uncommitted) |
+| Repository | all documentation committed and pushed — `main` = `20b98d1`, working tree clean |
 
 ## 2. What changed in the last milestone
 
-1. **Documentation package written** — 71 markdown documents across product, research,
+1. **Documentation package written** — 63 markdown documents under `docs/` (107 repo-wide) across product, research,
    architecture (+8 ADRs), database, bot interface, security, design, testing, DevOps,
    AI collaboration and project management, plus machine-readable artifacts.
 2. **Generated artifacts**
@@ -32,8 +32,9 @@
 4. **Repository hygiene** — `LICENSE` (MIT), `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`,
    `SECURITY.md`, `.editorconfig`, `CHANGELOG.md`, issue/PR templates,
    `.github/workflows/{ci,security}.yml`.
-5. **Source fix** — removed a duplicated `conv:unarch:` callback decorator in
-   `src/bot/handlers/conversations.py` (aiogram registered the handler twice).
+5. **No source change** — the duplicate `conv:unarch:` decorator seen in this workspace
+   existed only in an unrelated import of the repo; real `main` registers that handler
+   once, so the milestone is documentation-only.
 
 ## 3. Verification actually performed
 
@@ -49,16 +50,16 @@
 **Not verified:** live bot run, real provider call, container build, CI execution,
 Telegram rendering of any screen.
 
-## 4. Uncommitted state
+## 4. Commit state
 
-- New: `docs/`, `artifacts/`, `prompts/`, `skills/`, `templates/`, `manifest/`,
-  `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursor/`, `.github/*` (except existing files),
-  `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `LICENSE`, `.editorconfig`,
-  `CHANGELOG.md`.
-- Modified: `README.md` (docs index; corrected the Alembic and pydantic-settings claims),
-  `HANDOFF.md` (this file), `docs/ARCHITECTURE.md` (cross-links),
-  `src/bot/handlers/conversations.py` (duplicate decorator removed).
-- Nothing was committed or pushed.
+- Everything above is committed in `20b98d1` — *docs: add the full engineering
+  documentation and agent instruction set* — and pushed to `main`; the branch
+  `docs/engineering-blueprint` points at the same commit.
+- 128 files changed (12,722 insertions, 142 deletions); 204 files tracked in total,
+  63 of them under `docs/`. Working tree clean.
+- Touched outside the new directories: `README.md` (docs index; corrected the Alembic and
+  pydantic-settings claims), `HANDOFF.md` (this file), `docs/ARCHITECTURE.md`
+  (cross-links). No `src/` change.
 
 ## 5. Database status
 
