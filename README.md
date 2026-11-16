@@ -39,11 +39,11 @@ All UI strings are localized in `src/localization/en.json` and `src/localization
 
 ### Quality Attributes
 
-- **Versioned migrations** with Alembic (v1 creates schema, v2 adds personas, prompts, token columns)
+- **Versioned, additive migrations** with an in-repo runner (`src/database/migrations.py`): v1 creates the schema, v2 adds personas, prompts and token columns
 - **Rate limiting** and **daily caps** with in-memory sliding 60s window
 - **Structured logging**
-- **Complete test coverage**: localization parity, routing classification, repositories, migrations
-- **All 31 tests pass** including routing classification and model selection
+- **Behavioural tests** for localization parity, routing, repositories, prompts and migrations (no handler-level tests yet)
+- **All 32 tests pass** locally (`pytest -q`), offline — no network or token required
 
 ---
 
@@ -54,10 +54,10 @@ All UI strings are localized in `src/localization/en.json` and `src/localization
 | **Runtime** | Python 3.12+ |
 | **Framework** | aiogram 3.x |
 | **ORM** | SQLAlchemy 2.x |
-| **Migrations** | Alembic |
+| **Migrations** | In-repo additive runner (`SCHEMA_VERSION = 2`) |
 | **Async** | asyncio with `asyncio_mode=auto` |
 | **Localization** | Identical key sets in `en.json` and `fa.json` |
-| **Container** | pydantic-settings with module-level `container` singleton |
+| **Config** | pydantic `BaseSettings` (env + `.env`) with a module-level `container` singleton |
 | **Deployment** | Docker + Docker Compose |
 | **Testing** | pytest, pytest-asyncio |
 
@@ -92,18 +92,22 @@ python run.py
 ```
 telegram-ai-assistant/
 ├── src/                    # Source code
-│   ├── core/              # Core configurations and logging
-│   ├── database/          # SQLAlchemy models and migrations
-│   ├── services/          # AI, GitHub, tools services
-│   ├── bot/               # Handlers and keyboards
-│   └── localization/      # en.json and fa.json
-├── data/                   # SQLite database output
-├── tests/                  # 31 passing tests
-├── Dockerfile              # Production Docker configuration
-├── docker-compose.yml      # Multi-container setup
+│   ├── core/               # Config, logging, service container
+│   ├── database/           # SQLAlchemy models, migrations, repositories
+│   ├── services/           # AI, chat engine, tools, memory, GitHub
+│   ├── bot/                # Handlers, keyboards, views, middlewares, ui
+│   ├── localization/       # en.json and fa.json
+│   └── utils/              # Text, states and time helpers
+├── data/                   # SQLite database output (git-ignored)
+├── tests/                   # 32 passing tests
+├── docs/                    # Full engineering documentation (start at docs/index.md)
+├── artifacts/               # schema.sql, seed.sql, telegram-interface.json, diagrams
+├── prompts/ skills/ templates/ manifest/   # Reusable agent assets
+├── AGENTS.md               # Canonical instructions for AI coding agents
+├── Dockerfile              # Production Docker image
+├── docker-compose.yml      # Single-service Compose setup
 ├── README.md               # This file
-├── HANDOFF.md             # Handoff documentation
-└── docs/ARCHITECTURE.md    # Architectural decisions
+└── HANDOFF.md              # Continuation notes and current status
 ```
 
 ---
@@ -122,7 +126,7 @@ python -m pytest tests/test_migrations.py -q     # Migration tests
 python -m pytest tests/test_text.py -q          # Text utilities
 ```
 
-**Result**: `31 passed, 0 failed`
+**Result**: `32 passed, 0 failed`
 
 ---
 
@@ -132,6 +136,27 @@ Both Persian and English locales are maintained with **identical key sets**. The
 
 - `src/localization/en.json` - English strings
 - `src/localization/fa.json` - Persian strings (RTL-friendly)
+
+---
+
+## 📚 Documentation
+
+The complete engineering documentation lives in [`docs/`](docs/index.md): product and
+requirements, research, architecture with 8 ADRs, database, bot-interface contract,
+security, chat-UX design, testing, DevOps and project status.
+
+| Start here | For |
+| --- | --- |
+| [docs/index.md](docs/index.md) | Map of every document |
+| [AGENTS.md](AGENTS.md) | Instructions for AI coding agents (canonical) |
+| [HANDOFF.md](HANDOFF.md) | Current status, gaps and next steps |
+| [docs/architecture/system-architecture.md](docs/architecture/system-architecture.md) | How the system is structured |
+| [docs/project/project-status.md](docs/project/project-status.md) | What is done and what is verified |
+| [manifest/requirements-traceability.csv](manifest/requirements-traceability.csv) | Requirement → test traceability |
+
+Reusable assets: [`prompts/`](prompts/README.md) (23 prompts),
+[`skills/`](skills/) (4 procedures), [`templates/`](templates/) (ADR and doc templates),
+[`artifacts/`](artifacts/) (generated schema, seed, interface contract, diagrams).
 
 ---
 

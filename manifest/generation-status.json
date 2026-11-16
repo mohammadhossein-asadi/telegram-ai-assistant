@@ -1,0 +1,146 @@
+{
+  "project": "telegram-ai-assistant",
+  "generated": "2026-11-16",
+  "branch": "freebuff/835b2012f2cdc9610f50bd1b",
+  "blueprint": "UNIVERSAL IDEA-TO-ENGINEERING BLUEPRINT GENERATOR.md",
+  "scope": {
+    "stages_completed": [
+      "product-dna",
+      "research",
+      "architecture",
+      "documentation-chunks",
+      "handoff"
+    ],
+    "source_basis": "the repository's own code, configuration, tests and git history",
+    "external_facts": "competitor and licence facts only, from live web sources listed in docs/research/competitor-analysis.md",
+    "invented_facts": "none knowingly; unknowns are marked [UNKNOWN — USER INPUT REQUIRED]"
+  },
+  "counts": {
+    "markdown_documents": 107,
+    "documentation_chunks": 11,
+    "functional_requirements": 76,
+    "non_functional_requirements": 61,
+    "business_rules": 53,
+    "test_cases": 70,
+    "adrs": 8,
+    "prompts": 23,
+    "skills": 4,
+    "template_kinds": 2,
+    "mermaid_diagrams": 30
+  },
+  "diff_from_blueprint": [
+    "No HTTP API exists, so docs/api documents the Telegram command and callback contract instead of OpenAPI; the machine-readable artifact is artifacts/api/telegram-interface.json.",
+    "No web UI exists, so docs/design documents chat-card UX, Persian RTL behaviour and keyboard hierarchy instead of screens and components in the browser sense.",
+    "No authentication is implemented beyond Telegram identity + ADMIN_IDS, so docs/api/authentication.md documents that trust boundary rather than a login flow.",
+    "custom personas had no requirement ids, so FR-CPERS-001..005 were added (section 16) after reading handlers and repositories."
+  ],
+  "checks": [
+    {
+      "name": "pytest",
+      "command": "pytest -q",
+      "result": "pass",
+      "detail": "32 passed, 0 failed",
+      "verified_at": "2026-11-16"
+    },
+    {
+      "name": "compile",
+      "command": "python -m compileall -q src",
+      "result": "pass",
+      "detail": "no syntax errors"
+    },
+    {
+      "name": "schema.sql executes",
+      "command": "sqlite3 :memory: < artifacts/database/schema.sql",
+      "result": "pass",
+      "detail": "10 tables created; schema_version rows 1 and 2"
+    },
+    {
+      "name": "seed.sql idempotent",
+      "command": "sqlite3 db < artifacts/database/seed.sql (twice)",
+      "result": "pass",
+      "detail": "second run leaves row counts unchanged"
+    },
+    {
+      "name": "interface json valid",
+      "command": "python -m json.tool artifacts/api/telegram-interface.json",
+      "result": "pass",
+      "detail": "parses"
+    },
+    {
+      "name": "manifest json valid",
+      "command": "python -m json.tool manifest/documentation-index.json; python -m json.tool manifest/generation-status.json",
+      "result": "pass",
+      "detail": "parses"
+    },
+    {
+      "name": "traceability csv parses",
+      "command": "csv.DictReader over manifest/requirements-traceability.csv",
+      "result": "pass",
+      "detail": "76 data rows, 10 columns, 25 requirements referenced by at least one test case, 9 with an automated test"
+    },
+    {
+      "name": "internal links",
+      "command": "relative-link + heading-anchor scan over all markdown",
+      "result": "pass",
+      "detail": "291 checked, 0 broken (inline-code pseudo-links excluded)"
+    },
+    {
+      "name": "locale keys referenced by docs",
+      "command": "flat-key comparison against src/localization/en.json",
+      "result": "pass",
+      "detail": "every quoted t() key in docs exists in the catalog; 6 invented keys (errors.not_found, errors.forbidden, errors.rate_limit, errors.daily_limit, errors.no_retry, admin.usage) were replaced with the real behaviour (silent toast, common.not_admin, errors.rate_limited, errors.daily_limited, chat.empty, hardcoded usage string)"
+    },
+    {
+      "name": "mermaid syntax scan",
+      "command": "diagram-type + subgraph/end balance + fence closure",
+      "result": "pass",
+      "detail": "30 blocks (22 flowchart, 4 sequence, 3 ER), 0 problems; not rendered by a Mermaid engine"
+    },
+    {
+      "name": "CI workflows executed",
+      "command": "n/a",
+      "result": "not-run",
+      "detail": ".github/workflows/ci.yml and security.yml were written but never executed by GitHub"
+    },
+    {
+      "name": "live bot run",
+      "command": "python run.py",
+      "result": "not-run",
+      "detail": "no BOT_TOKEN in the workspace"
+    },
+    {
+      "name": "live provider call",
+      "command": "chat turn against a real endpoint",
+      "result": "not-run",
+      "detail": "no AI_API_KEY in the workspace; provider behaviour is only unit-tested with a fake"
+    },
+    {
+      "name": "container build",
+      "command": "docker build .",
+      "result": "not-run",
+      "detail": "Docker unavailable in this environment"
+    },
+    {
+      "name": "Telegram rendering",
+      "command": "visual check of menus and formatted replies",
+      "result": "not-run",
+      "detail": "requires a live bot; HTML escaper and chunker are covered by unit tests only"
+    }
+  ],
+  "known_gaps": [
+    "G1 live smoke test not performed",
+    "G2 provider keys stored in plaintext (ai_providers.api_key)",
+    "G3 no account-deletion path (manual SQL only)",
+    "G4 no CI execution record",
+    "G5 no admin audit log",
+    "G6 FSM and rate limits are in-memory only",
+    "G7 no handler-level tests for the busiest callbacks",
+    "G8 README historically claimed Alembic and pydantic-settings; corrected in this pass",
+    "G9 .env.example omits BOT_NAME_FA, BOT_NAME_EN, GITHUB_USERNAME, GITHUB_TOKEN, GITHUB_CACHE_TTL, AUTO_ROUTING_DEFAULT"
+  ],
+  "uncommitted": {
+    "source_changes": ["src/bot/handlers/conversations.py — removed duplicate conv:unarch: callback decorator"],
+    "documentation_added": "docs/, artifacts/, prompts/, skills/, templates/, manifest/, AGENTS.md and adapters, community files, .github templates and workflows",
+    "note": "nothing was committed or pushed"
+  }
+}

@@ -1,0 +1,18 @@
+%% System context — who talks to what (no inbound network ports).
+flowchart LR
+    U["Telegram user<br/>FA / EN"] -->|"message, callback"| TG["Telegram Bot API"]
+    TG -->|"long polling getUpdates"| BOT["telegram-ai-assistant<br/>single process"]
+
+    ADM["Operator<br/>/admin"] -->|"Telegram"| TG
+
+    BOT -->|"POST /chat/completions"| AI["AI provider<br/>OpenAI-compatible"]
+    BOT -->|"GET /users/:name (cached 900s)"| GH["GitHub REST API"]
+
+    subgraph Host["Host / container"]
+        BOT
+        DB[("SQLite<br/>./data/bot.db")]
+        ENV[".env<br/>secrets"]
+    end
+
+    BOT --- DB
+    ENV --> BOT

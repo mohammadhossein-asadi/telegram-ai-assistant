@@ -1,0 +1,63 @@
+---
+description: Python conventions for this repository
+globs: ["src/**/*.py", "tests/**/*.py", "run.py"]
+alwaysApply: false
+---
+
+# Python conventions
+
+## Module basics
+
+- Start every module with `from __future__ import annotations`.
+- Type hints on public functions; `X | None`, `list[str]`, `dict[str, int]`.
+- Double quotes, 4-space indent, ~88 columns.
+- No `print` — use `get_logger(__name__)` from `core.logging`.
+
+## Async and DB
+
+- All I/O is async.
+- Repository pattern:
+
+```python
+async def get(self, conv_id: int, user_id: int) -> Conversation | None:
+    async with self.db.session() as session:
+        conv = await session.get(Conversation, conv_id)
+        return conv if conv and conv.user_id == user_id else None
+```
+
+- One session per method; commit inside the method; never hold a session across awaits
+  that call the network.
+- No f-strings in SQL. Use SQLAlchemy expressions with bound parameters.
+
+## aiogram patterns
+
+```python
+router = Router(name="domain")
+
+@router.callback_query(F.data.startswith("dom:"))
+async def on_event(cb: CallbackQuery, user: User, lang: str) -> None:
+    await cb.answer()
+```
+
+- `user` and `lang` come from `UserMiddleware` — do not re-fetch them.
+- Always acknowledge callbacks (`cb.answer()`), even if nothing changes.
+- Use `safe_edit` from `bot/ui.py` for edits; catch "message is not modified".
+- Register a new router in `ROUTERS` **before** `chat.router`.
+
+## Error handling
+
+- Raise `AIError` (or subclasses) from provider code; let handlers render `errors.*`.
+- Never leak provider messages to users; truncate logged errors to 300 chars.
+- Return values signal absence (`None`, `False`), not exceptions, for not-found cases.
+
+## Tests
+
+```python
+async def test_behaviour(db) -> None:   # asyncio_mode=auto, no decorator
+    ...
+```
+
+- In-memory DB fixtures from `conftest.py`; fake provider for AI.
+- No network, no sleeps, no dependence on wall-clock time.
+- Assert observable outcomes (rows returned/created), not internal call counts unless
+  the call is the contract.

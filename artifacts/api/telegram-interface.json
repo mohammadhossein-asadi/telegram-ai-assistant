@@ -1,0 +1,453 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Telegram AI Assistant — bot interface contract",
+  "description": "Machine-readable description of the bot's public surface: commands, callback namespaces and free-text handling. Extracted from src/bot/handlers/*.py. This is a contract document, not an executable schema for updates.",
+  "version": "1.0.0",
+  "schemaVersion": 2,
+  "generated": "2026-11-16",
+  "transport": {
+    "type": "long-polling",
+    "framework": "aiogram>=3.13,<4",
+    "parseMode": "HTML",
+    "messageChunkLimit": 3500,
+    "telegramMessageLimit": 4096,
+    "callbackDataLimitBytes": 64
+  },
+  "identity": {
+    "subjectColumn": "users.telegram_id",
+    "session": "none",
+    "authTiers": [
+      "user",
+      "admin"
+    ],
+    "blockedBehaviour": "update dropped in middleware, no reply",
+    "adminGrant": "ADMIN_IDS environment variable (comma separated telegram ids)"
+  },
+  "commands": [
+    {
+      "command": "/start",
+      "args": [],
+      "auth": "user",
+      "effect": "create/find user, show home menu",
+      "response": "welcome + main keyboard"
+    },
+    {
+      "command": "/menu",
+      "args": [],
+      "auth": "user",
+      "effect": "render home menu",
+      "response": "main keyboard"
+    },
+    {
+      "command": "/help",
+      "args": [],
+      "auth": "user",
+      "effect": "show help text",
+      "response": "help + main keyboard"
+    },
+    {
+      "command": "/lang",
+      "args": [],
+      "auth": "user",
+      "effect": "show language picker",
+      "response": "inline keyboard lang:fa | lang:en | lang:keep"
+    },
+    {
+      "command": "/cancel",
+      "args": [],
+      "auth": "user",
+      "effect": "clear FSM state",
+      "response": "cancelled + menu"
+    },
+    {
+      "command": "/new",
+      "args": [],
+      "auth": "user",
+      "effect": "create conversation and make it current",
+      "response": "new chat prompt"
+    },
+    {
+      "command": "/retry",
+      "args": [],
+      "auth": "user",
+      "effect": "delete last assistant message and regenerate",
+      "response": "new assistant reply"
+    },
+    {
+      "command": "/admin",
+      "args": [],
+      "auth": "admin",
+      "effect": "open admin panel",
+      "response": "admin keyboard + stats summary"
+    },
+    {
+      "command": "/block",
+      "args": [
+        "telegram_id"
+      ],
+      "auth": "admin",
+      "effect": "set users.is_blocked = true",
+      "response": "confirmation"
+    },
+    {
+      "command": "/unblock",
+      "args": [
+        "telegram_id"
+      ],
+      "auth": "admin",
+      "effect": "set users.is_blocked = false",
+      "response": "confirmation"
+    }
+  ],
+  "freeText": {
+    "handler": "src/bot/handlers/chat.py",
+    "registeredLast": true,
+    "effect": "send text to the active conversation; enforces rate + daily limits; persists both turns on success",
+    "unknownCommandBehaviour": "treated as chat text"
+  },
+  "callbackNamespaces": [
+    {
+      "namespace": "menu",
+      "owner": "any handler with navigation",
+      "payloads": [
+        "menu:chat",
+        "menu:convs",
+        "menu:persona",
+        "menu:model",
+        "menu:tools",
+        "menu:memory",
+        "menu:prompts",
+        "menu:settings",
+        "menu:about",
+        "menu:profile"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "home",
+      "owner": "start",
+      "payloads": [
+        "home"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "lang",
+      "owner": "start",
+      "payloads": [
+        "lang:fa",
+        "lang:en",
+        "lang:keep"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "noop",
+      "owner": "start",
+      "payloads": [
+        "noop"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "conv",
+      "owner": "conversations",
+      "payloads": [
+        "conv:list:<page>",
+        "conv:new",
+        "conv:open:<id>",
+        "conv:pin:<id>",
+        "conv:search",
+        "conv:exp:<id>",
+        "conv:sum:<id>",
+        "conv:rn:<id>",
+        "conv:arch:<id>",
+        "conv:unarch:<id>",
+        "conv:del:<id>",
+        "conv:delok:<id>"
+      ],
+      "auth": "user",
+      "ownershipChecked": true
+    },
+    {
+      "namespace": "pv",
+      "owner": "personality",
+      "payloads": [
+        "pv:presets",
+        "pv:style",
+        "pv:tone",
+        "pv:cr",
+        "pv:custom"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "ps",
+      "owner": "personality",
+      "payloads": [
+        "ps:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "st",
+      "owner": "personality",
+      "payloads": [
+        "st:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "tn",
+      "owner": "personality",
+      "payloads": [
+        "tn:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "cr",
+      "owner": "personality",
+      "payloads": [
+        "cr:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "cps",
+      "owner": "custom_personas",
+      "payloads": [
+        "cps:list",
+        "cps:new",
+        "cps:import",
+        "cps:default:<id>",
+        "cps:assign:<id>",
+        "cps:edit:<id>",
+        "cps:del:<id>",
+        "cps:exp:<id>"
+      ],
+      "auth": "user",
+      "ownershipChecked": true
+    },
+    {
+      "namespace": "mem",
+      "owner": "memory",
+      "payloads": [
+        "mem:toggle",
+        "mem:clear",
+        "mem:clearall"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "mdl",
+      "owner": "model",
+      "payloads": [
+        "mdl:<provider>:<model>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "tools",
+      "owner": "tools",
+      "payloads": [
+        "tools:summarize",
+        "tools:translate",
+        "tools:write",
+        "tools:explain",
+        "tools:coding",
+        "tools:custom"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "tc",
+      "owner": "tools",
+      "payloads": [
+        "tc:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "ts",
+      "owner": "tools",
+      "payloads": [
+        "ts:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "tt",
+      "owner": "tools",
+      "payloads": [
+        "tt:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "tw",
+      "owner": "tools",
+      "payloads": [
+        "tw:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "te",
+      "owner": "tools",
+      "payloads": [
+        "te:<key>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "pr",
+      "owner": "prompt_studio",
+      "payloads": [
+        "pr:list:<page>",
+        "pr:new",
+        "pr:cats",
+        "pr:cat:<name>",
+        "pr:run:<id>",
+        "pr:edit:<id>",
+        "pr:del:<id>",
+        "pr:exp:<id>"
+      ],
+      "auth": "user",
+      "ownershipChecked": true
+    },
+    {
+      "namespace": "set",
+      "owner": "settings",
+      "payloads": [
+        "set:rlang",
+        "set:emoji",
+        "set:mem",
+        "set:routing",
+        "set:privacy",
+        "set:reset",
+        "set:resetok"
+      ],
+      "auth": "user",
+      "destructive": [
+        "set:reset",
+        "set:resetok"
+      ]
+    },
+    {
+      "namespace": "gh",
+      "owner": "developer",
+      "payloads": [
+        "gh:refresh",
+        "gh:repos:<page>",
+        "gh:popular",
+        "gh:repo:<name>"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "ab",
+      "owner": "about",
+      "payloads": [
+        "ab:dev",
+        "ab:bot",
+        "ab:support"
+      ],
+      "auth": "user"
+    },
+    {
+      "namespace": "adm",
+      "owner": "admin",
+      "payloads": [
+        "adm:home",
+        "adm:stats",
+        "adm:limits",
+        "adm:health",
+        "adm:broadcast",
+        "adm:providers",
+        "adm:addprov",
+        "adm:delprov:<id>"
+      ],
+      "auth": "admin",
+      "notes": "admin check repeated inside every handler"
+    }
+  ],
+  "errorKeys": [
+    "errors.ai",
+    "errors.ai_timeout",
+    "errors.rate_limited",
+    "errors.daily_limited",
+    "errors.generic",
+    "chat.blocked",
+    "chat.empty",
+    "common.error",
+    "common.not_admin",
+    "common.unknown"
+  ],
+  "limits": {
+    "perMinute": {
+      "env": "USER_RATE_LIMIT",
+      "default": 20,
+      "scope": "telegram user",
+      "windowSeconds": 60
+    },
+    "daily": {
+      "env": "MAX_DAILY_REQUESTS",
+      "default": 200,
+      "scope": "telegram user",
+      "source": "usage_logs count for today"
+    },
+    "contextMessages": {
+      "env": "MAX_CONTEXT_MESSAGES",
+      "default": 20,
+      "range": [
+        2,
+        200
+      ]
+    },
+    "conversationPageSize": 5,
+    "githubCacheTtlSeconds": {
+      "env": "GITHUB_CACHE_TTL",
+      "default": 900
+    }
+  },
+  "providers": {
+    "protocol": "openai-compatible chat completions",
+    "endpoint": "POST {base_url}/chat/completions",
+    "envProvider": {
+      "baseUrl": "AI_BASE_URL",
+      "apiKey": "AI_API_KEY",
+      "model": "AI_MODEL"
+    },
+    "runtimeProviders": {
+      "table": "ai_providers",
+      "adminOnly": true,
+      "keyStorage": "plaintext (see ADR-005)"
+    },
+    "capabilities": [
+      "general",
+      "coding",
+      "reasoning",
+      "creative",
+      "translation",
+      "summarization"
+    ]
+  },
+  "externalDependencies": [
+    {
+      "name": "Telegram Bot API",
+      "auth": "BOT_TOKEN",
+      "direction": "bi-directional"
+    },
+    {
+      "name": "AI provider",
+      "auth": "AI_API_KEY",
+      "direction": "outbound"
+    },
+    {
+      "name": "GitHub REST",
+      "auth": "GITHUB_TOKEN (optional)",
+      "direction": "outbound"
+    }
+  ]
+}

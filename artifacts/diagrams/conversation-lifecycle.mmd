@@ -1,0 +1,12 @@
+%% Conversation state as stored (there is no explicit state machine in code).
+stateDiagram-v2
+    [*] --> Active: conversations.create()
+    Active --> Active: message / rename / pin / model override
+    Active --> Archived: conv:arch
+    Archived --> Active: conv:unarch
+    Active --> [*]: conv:delok (hard delete, cascades messages)
+    Archived --> [*]: conv:delok
+    note right of Archived
+        Archived conversations are listed separately
+        and have no pagination (known gap).
+    end note

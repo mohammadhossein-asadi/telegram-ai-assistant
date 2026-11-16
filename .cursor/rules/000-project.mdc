@@ -1,0 +1,41 @@
+---
+description: Project-wide rules for the Telegram AI Assistant repository
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Telegram AI Assistant — project rules
+
+Canonical instructions: `AGENTS.md`. Read it before non-trivial work.
+
+## Shape of the system
+
+- Python 3.12 · aiogram 3 · SQLAlchemy 2 async · SQLite · **no HTTP API, no web UI**.
+- Entry: `run.py` → `src/bot/main.py::main`. Imports are rooted at `src/`.
+- Layers: `bot/handlers` → `services` → `database/repositories` → `database/models`.
+- `core/container.py` is a singleton populated once in `bootstrap()`.
+
+## Non-negotiable invariants
+
+1. No `aiogram` import inside `services/` or `database/`.
+2. No SQL in `bot/`; go through a repository.
+3. Every user-scoped query filters on `user_id`.
+4. The chat router stays **last** in `src/bot/handlers/__init__.py:ROUTERS`.
+5. Callback payloads: `namespace:action[:id]`; one namespace, one owning router.
+6. Locale parity: any new string goes into both `src/localization/en.json` and
+   `fa.json` (test enforces).
+7. Schema change ⇒ bump `SCHEMA_VERSION`, add an additive column entry, update
+   `artifacts/database/schema.sql` + `docs/database/data-dictionary.md`.
+8. Secrets never appear in code, tests, logs, or docs.
+
+## Working agreement
+
+- Smallest diff that solves the request; no drive-by refactors or reformatting.
+- Do not add dependencies, frameworks, linters, or CI steps unless asked.
+- Verify with `pytest -q` and `python -m compileall -q src` after touching `src/`.
+- Report what you ran; never claim an unrun check passed.
+- Unknown product facts: write `[UNKNOWN — USER INPUT REQUIRED]` rather than guessing.
+
+## Map
+
+`docs/index.md` · `docs/architecture/system-architecture.md` · `HANDOFF.md`

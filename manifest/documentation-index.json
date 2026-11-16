@@ -1,0 +1,702 @@
+{
+  "generated": "2026-11-16",
+  "repository": "telegram-ai-assistant",
+  "generator": "documentation package (code-grounded)",
+  "chunks": [
+    {
+      "id": "product",
+      "name": "Product",
+      "audience": "product, design, support",
+      "files": [
+        {
+          "path": "docs/product/business-rules.md",
+          "title": "Business Rules",
+          "status": "complete"
+        },
+        {
+          "path": "docs/product/functional-requirements.md",
+          "title": "Functional Requirements",
+          "status": "complete"
+        },
+        {
+          "path": "docs/product/non-functional-requirements.md",
+          "title": "Non-Functional Requirements",
+          "status": "complete"
+        },
+        {
+          "path": "docs/product/product-dna.md",
+          "title": "Product DNA — Telegram AI Assistant",
+          "status": "complete"
+        },
+        {
+          "path": "docs/product/product-roadmap.md",
+          "title": "Product Roadmap",
+          "status": "complete"
+        },
+        {
+          "path": "docs/product/user-journeys.md",
+          "title": "User Journeys",
+          "status": "complete"
+        },
+        {
+          "path": "docs/product/user-personas.md",
+          "title": "User Personas",
+          "status": "complete"
+        },
+        {
+          "path": "docs/product/user-stories.md",
+          "title": "User Stories",
+          "status": "complete"
+        }
+      ],
+      "file_count": 8
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "audience": "maintainers, contributors",
+      "files": [
+        {
+          "path": "docs/research/competitor-analysis.md",
+          "title": "Competitor & Comparable-Product Analysis",
+          "status": "complete"
+        },
+        {
+          "path": "docs/research/opensource-research.md",
+          "title": "Open-Source & Dependency Research",
+          "status": "complete"
+        },
+        {
+          "path": "docs/research/technical-research.md",
+          "title": "Technical Research",
+          "status": "complete"
+        }
+      ],
+      "file_count": 3
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture",
+      "audience": "engineers, reviewers",
+      "files": [
+        {
+          "path": "docs/architecture/decisions/ADR-001-architecture-pattern.md",
+          "title": "ADR-001 — Layered modular monolith with a service container",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/decisions/ADR-002-persistence-and-migrations.md",
+          "title": "ADR-002 — SQLite + SQLAlchemy async with a custom additive migration runner",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/decisions/ADR-003-ai-provider-abstraction.md",
+          "title": "ADR-003 — Provider-agnostic AI layer with a registry and heuristic routing",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/decisions/ADR-004-chat-execution-and-context.md",
+          "title": "ADR-004 — Persist after success, bounded context, tools outside history",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/decisions/ADR-005-secrets-and-provider-keys.md",
+          "title": "ADR-005 — Secrets live in the environment; admin-added provider keys are a documented exception",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/decisions/ADR-006-deployment-and-runtime.md",
+          "title": "ADR-006 — Single container, long polling, SQLite volume",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/decisions/ADR-007-localization.md",
+          "title": "ADR-007 — JSON catalogs, per-user language, parity enforced by test",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/decisions/ADR-008-state-management-and-limits.md",
+          "title": "ADR-008 — In-memory FSM, in-process rate buckets, per-user serialisation",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/repository-structure.md",
+          "title": "Repository Structure",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/system-architecture.md",
+          "title": "System Architecture",
+          "status": "complete"
+        },
+        {
+          "path": "docs/architecture/technology-stack.md",
+          "title": "Technology Stack",
+          "status": "complete"
+        }
+      ],
+      "file_count": 11
+    },
+    {
+      "id": "database",
+      "name": "Database",
+      "audience": "engineers, operators",
+      "files": [
+        {
+          "path": "docs/database/data-dictionary.md",
+          "title": "Data Dictionary",
+          "status": "complete"
+        },
+        {
+          "path": "docs/database/database-design.md",
+          "title": "Database Design",
+          "status": "complete"
+        },
+        {
+          "path": "docs/database/entity-relationship-diagram.md",
+          "title": "Entity-Relationship Diagram",
+          "status": "complete"
+        },
+        {
+          "path": "docs/database/indexes-and-constraints.md",
+          "title": "Indexes and Constraints",
+          "status": "complete"
+        },
+        {
+          "path": "docs/database/migrations-strategy.md",
+          "title": "Migrations Strategy",
+          "status": "complete"
+        },
+        {
+          "path": "docs/database/seed-data-strategy.md",
+          "title": "Seed Data Strategy",
+          "status": "complete"
+        }
+      ],
+      "file_count": 6
+    },
+    {
+      "id": "api",
+      "name": "Bot interface",
+      "audience": "engineers, reviewers",
+      "files": [
+        {
+          "path": "docs/api/api-design.md",
+          "title": "API Design — Telegram Interface Contract",
+          "status": "complete"
+        },
+        {
+          "path": "docs/api/authentication.md",
+          "title": "Authentication & Authorization",
+          "status": "complete"
+        },
+        {
+          "path": "docs/api/error-handling.md",
+          "title": "Error Handling",
+          "status": "complete"
+        },
+        {
+          "path": "docs/api/rate-limiting.md",
+          "title": "Rate Limiting",
+          "status": "complete"
+        }
+      ],
+      "file_count": 4
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "audience": "reviewers, operators",
+      "files": [
+        {
+          "path": "docs/security/authentication-authorization.md",
+          "title": "Authentication & Authorization (Security View)",
+          "status": "complete"
+        },
+        {
+          "path": "docs/security/data-protection.md",
+          "title": "Data Protection",
+          "status": "complete"
+        },
+        {
+          "path": "docs/security/secrets-management.md",
+          "title": "Secrets Management",
+          "status": "complete"
+        },
+        {
+          "path": "docs/security/security-architecture.md",
+          "title": "Security Architecture",
+          "status": "complete"
+        },
+        {
+          "path": "docs/security/security-testing.md",
+          "title": "Security Testing",
+          "status": "complete"
+        },
+        {
+          "path": "docs/security/threat-model.md",
+          "title": "Threat Model",
+          "status": "complete"
+        }
+      ],
+      "file_count": 6
+    },
+    {
+      "id": "design",
+      "name": "Design / UX",
+      "audience": "designers, engineers",
+      "files": [
+        {
+          "path": "docs/design/accessibility.md",
+          "title": "Accessibility",
+          "status": "complete"
+        },
+        {
+          "path": "docs/design/components.md",
+          "title": "Components",
+          "status": "complete"
+        },
+        {
+          "path": "docs/design/design-principles.md",
+          "title": "Design Principles",
+          "status": "complete"
+        },
+        {
+          "path": "docs/design/design-system.md",
+          "title": "Design System",
+          "status": "complete"
+        },
+        {
+          "path": "docs/design/responsive-design.md",
+          "title": "Responsive & Cross-Client Design",
+          "status": "complete"
+        }
+      ],
+      "file_count": 5
+    },
+    {
+      "id": "testing",
+      "name": "Testing",
+      "audience": "engineers, reviewers",
+      "files": [
+        {
+          "path": "docs/testing/acceptance-criteria.md",
+          "title": "Acceptance Criteria (Release Level)",
+          "status": "complete"
+        },
+        {
+          "path": "docs/testing/performance-testing.md",
+          "title": "Performance Testing",
+          "status": "complete"
+        },
+        {
+          "path": "docs/testing/regression-testing.md",
+          "title": "Regression Testing",
+          "status": "complete"
+        },
+        {
+          "path": "docs/testing/test-cases.md",
+          "title": "Test Cases",
+          "status": "complete"
+        },
+        {
+          "path": "docs/testing/test-plan.md",
+          "title": "Test Plan",
+          "status": "complete"
+        },
+        {
+          "path": "docs/testing/testing-strategy.md",
+          "title": "Testing Strategy",
+          "status": "complete"
+        }
+      ],
+      "file_count": 6
+    },
+    {
+      "id": "devops",
+      "name": "DevOps",
+      "audience": "operators",
+      "files": [
+        {
+          "path": "docs/devops/backup-recovery.md",
+          "title": "Backup & Recovery",
+          "status": "complete"
+        },
+        {
+          "path": "docs/devops/ci-cd.md",
+          "title": "CI/CD",
+          "status": "complete"
+        },
+        {
+          "path": "docs/devops/deployment.md",
+          "title": "Deployment",
+          "status": "complete"
+        },
+        {
+          "path": "docs/devops/development-environment.md",
+          "title": "Development Environment",
+          "status": "complete"
+        },
+        {
+          "path": "docs/devops/environment-variables.md",
+          "title": "Environment Variables",
+          "status": "complete"
+        },
+        {
+          "path": "docs/devops/monitoring-logging.md",
+          "title": "Monitoring & Logging",
+          "status": "complete"
+        },
+        {
+          "path": "docs/devops/operations-runbook.md",
+          "title": "Operations Runbook",
+          "status": "complete"
+        }
+      ],
+      "file_count": 7
+    },
+    {
+      "id": "ai",
+      "name": "AI collaboration",
+      "audience": "agent users, maintainers",
+      "files": [
+        {
+          "path": "docs/ai/agent-compatibility.md",
+          "title": "Agent Compatibility",
+          "status": "complete"
+        }
+      ],
+      "file_count": 1
+    },
+    {
+      "id": "project",
+      "name": "Project management",
+      "audience": "maintainers",
+      "files": [
+        {
+          "path": "docs/project/decisions-log.md",
+          "title": "Decisions Log",
+          "status": "complete"
+        },
+        {
+          "path": "docs/project/implementation-log.md",
+          "title": "Implementation Log",
+          "status": "complete"
+        },
+        {
+          "path": "docs/project/open-questions.md",
+          "title": "Open Questions",
+          "status": "complete"
+        },
+        {
+          "path": "docs/project/project-status.md",
+          "title": "Project Status",
+          "status": "complete"
+        }
+      ],
+      "file_count": 4
+    }
+  ],
+  "root_files": [
+    {
+      "path": "README.md",
+      "title": "Telegram AI Assistant"
+    },
+    {
+      "path": "HANDOFF.md",
+      "title": "HANDOFF"
+    },
+    {
+      "path": "AGENTS.md",
+      "title": "AGENTS.md — canonical instructions for AI coding agents"
+    },
+    {
+      "path": "CLAUDE.md",
+      "title": "CLAUDE.md"
+    },
+    {
+      "path": "GEMINI.md",
+      "title": "GEMINI.md"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "title": "Contributing"
+    },
+    {
+      "path": "SECURITY.md",
+      "title": "Security Policy"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "title": "Contributor Covenant Code of Conduct"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "title": "Changelog"
+    },
+    {
+      "path": "docs/index.md",
+      "title": "Documentation"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "title": "Architecture"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "artifacts/api/telegram-interface.json",
+      "kind": "json"
+    },
+    {
+      "path": "artifacts/configurations/env-reference.md",
+      "kind": "md"
+    },
+    {
+      "path": "artifacts/database/schema.sql",
+      "kind": "sql"
+    },
+    {
+      "path": "artifacts/database/seed.sql",
+      "kind": "sql"
+    },
+    {
+      "path": "artifacts/diagrams/chat-sequence.mmd",
+      "kind": "mmd"
+    },
+    {
+      "path": "artifacts/diagrams/conversation-lifecycle.mmd",
+      "kind": "mmd"
+    },
+    {
+      "path": "artifacts/diagrams/er.mmd",
+      "kind": "mmd"
+    },
+    {
+      "path": "artifacts/diagrams/request-pipeline.mmd",
+      "kind": "mmd"
+    },
+    {
+      "path": "artifacts/diagrams/system-context.mmd",
+      "kind": "mmd"
+    }
+  ],
+  "prompts": [
+    {
+      "path": "prompts/README.md",
+      "title": "Prompt library",
+      "phase": "prompts"
+    },
+    {
+      "path": "prompts/architecture/08-system-architecture.md",
+      "title": "08 — System architecture",
+      "phase": "architecture"
+    },
+    {
+      "path": "prompts/architecture/09-data-model.md",
+      "title": "09 — Data model change",
+      "phase": "architecture"
+    },
+    {
+      "path": "prompts/architecture/10-adr-authoring.md",
+      "title": "10 — ADR authoring",
+      "phase": "architecture"
+    },
+    {
+      "path": "prompts/architecture/11-interface-contract.md",
+      "title": "11 — Interface contract",
+      "phase": "architecture"
+    },
+    {
+      "path": "prompts/discovery/01-product-discovery.md",
+      "title": "01 — Product discovery",
+      "phase": "discovery"
+    },
+    {
+      "path": "prompts/discovery/02-persona-definition.md",
+      "title": "02 — Persona definition",
+      "phase": "discovery"
+    },
+    {
+      "path": "prompts/discovery/03-scope-and-non-goals.md",
+      "title": "03 — Scope and non-goals",
+      "phase": "discovery"
+    },
+    {
+      "path": "prompts/discovery/04-success-metrics.md",
+      "title": "04 — Success metrics",
+      "phase": "discovery"
+    },
+    {
+      "path": "prompts/handoff/22-release-handoff.md",
+      "title": "22 — Release handoff",
+      "phase": "handoff"
+    },
+    {
+      "path": "prompts/handoff/23-agent-handoff.md",
+      "title": "23 — Agent handoff",
+      "phase": "handoff"
+    },
+    {
+      "path": "prompts/implementation/12-feature-implementation.md",
+      "title": "12 — Feature implementation",
+      "phase": "implementation"
+    },
+    {
+      "path": "prompts/implementation/13-migration-implementation.md",
+      "title": "13 — Migration implementation",
+      "phase": "implementation"
+    },
+    {
+      "path": "prompts/implementation/14-localization-update.md",
+      "title": "14 — Localization update",
+      "phase": "implementation"
+    },
+    {
+      "path": "prompts/implementation/15-bug-fix.md",
+      "title": "15 — Bug fix",
+      "phase": "implementation"
+    },
+    {
+      "path": "prompts/research/05-competitor-analysis.md",
+      "title": "05 — Competitor analysis",
+      "phase": "research"
+    },
+    {
+      "path": "prompts/research/06-technical-feasibility.md",
+      "title": "06 — Technical feasibility",
+      "phase": "research"
+    },
+    {
+      "path": "prompts/research/07-dependency-evaluation.md",
+      "title": "07 — Dependency evaluation",
+      "phase": "research"
+    },
+    {
+      "path": "prompts/review/19-code-review.md",
+      "title": "19 — Code review",
+      "phase": "review"
+    },
+    {
+      "path": "prompts/review/20-security-review.md",
+      "title": "20 — Security review",
+      "phase": "review"
+    },
+    {
+      "path": "prompts/review/21-documentation-review.md",
+      "title": "21 — Documentation review",
+      "phase": "review"
+    },
+    {
+      "path": "prompts/testing/16-test-plan.md",
+      "title": "16 — Test plan",
+      "phase": "testing"
+    },
+    {
+      "path": "prompts/testing/17-test-case-generation.md",
+      "title": "17 — Test case generation",
+      "phase": "testing"
+    },
+    {
+      "path": "prompts/testing/18-regression-review.md",
+      "title": "18 — Regression review",
+      "phase": "testing"
+    }
+  ],
+  "skills": [
+    {
+      "path": "skills/ai-provider-integration/SKILL.md",
+      "name": "ai-provider-integration",
+      "title": "Skill: add an AI provider"
+    },
+    {
+      "path": "skills/database-migration/SKILL.md",
+      "name": "database-migration",
+      "title": "Skill: add a schema change"
+    },
+    {
+      "path": "skills/persian-localization/SKILL.md",
+      "name": "persian-localization",
+      "title": "Skill: Persian/English localization"
+    },
+    {
+      "path": "skills/telegram-handler/SKILL.md",
+      "name": "telegram-handler",
+      "title": "Skill: add a Telegram handler"
+    }
+  ],
+  "templates": [
+    {
+      "path": "templates/adr/ADR-template.md",
+      "title": "ADR-NNN — <short imperative title>"
+    },
+    {
+      "path": "templates/adr/README.md",
+      "title": "ADR templates"
+    },
+    {
+      "path": "templates/documentation/README.md",
+      "title": "Documentation templates"
+    },
+    {
+      "path": "templates/documentation/document-template.md",
+      "title": "<Document title>"
+    }
+  ],
+  "github": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/copilot-instructions.md"
+    },
+    {
+      "path": ".github/labeler.yml"
+    },
+    {
+      "path": ".github/workflows/ci.yml"
+    },
+    {
+      "path": ".github/workflows/security.yml"
+    },
+    {
+      "path": ".cursor/rules/000-project.mdc"
+    },
+    {
+      "path": ".cursor/rules/010-python.mdc"
+    }
+  ],
+  "instructions": {
+    "canonical": "AGENTS.md",
+    "adapters": [
+      "CLAUDE.md",
+      "GEMINI.md",
+      ".cursor/rules/000-project.mdc",
+      ".cursor/rules/010-python.mdc",
+      ".github/copilot-instructions.md"
+    ]
+  },
+  "manifest": [
+    {
+      "path": "manifest/documentation-index.json",
+      "purpose": "machine-readable map of this documentation set"
+    },
+    {
+      "path": "manifest/requirements-traceability.csv",
+      "purpose": "requirement -> source -> test traceability"
+    },
+    {
+      "path": "manifest/generation-status.json",
+      "purpose": "what was generated, what was checked, what remains unverified"
+    }
+  ]
+}

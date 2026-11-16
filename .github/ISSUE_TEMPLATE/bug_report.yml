@@ -1,0 +1,77 @@
+name: Bug report
+description: Something behaves incorrectly in the bot
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. **Do not include** your bot token, API keys, or private
+        chat content. For security issues use the private advisory flow in SECURITY.md.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues for the same problem
+          required: true
+        - label: This is not a security vulnerability (those go through SECURITY.md)
+          required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, in the chat and/or in the logs.
+      placeholder: "After tapping Delete on a conversation, the bot replied with …"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. /start
+        2. Chats → New
+        3. …
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: UI language
+      options: ["fa", "en", "both"]
+    validations:
+      required: true
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: Deployment
+      options: ["Docker Compose", "Docker", "bare metal / systemd", "PaaS", "local dev"]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: BOT_VERSION or the commit you are running
+      placeholder: "1.0.0 / 58e8dfd"
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: AI provider and model
+      description: Provider name and model (never the key)
+      placeholder: "openai / gpt-4o-mini"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log lines
+      description: Redact ids, tokens and chat content.
+      render: text

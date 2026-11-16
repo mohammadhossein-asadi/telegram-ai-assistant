@@ -1,0 +1,77 @@
+requirement_id,requirement,priority,implementing_source,requirement_doc,test_ids,test_status,automated_tests,live_verified,notes
+FR-CFG-001,The application must load configuration from environment and .env,P0,"`src/core/config.py`, `src/bot/main.py`",docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-CFG-002,The schema must be created and migrated automatically at boot,P0,`src/database/migrations.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-CFG-003,Services must be constructed once and shared,P0,"`src/core/container.py`, `src/bot/main.py`",docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-CFG-004,"Optional integrations must degrade, not crash",P1,"`src/services/ai/openai_compat.py`, `src/services/github/client.py`",docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-ONB-001,/start must register the user and offer a language choice,P0,"`src/bot/middlewares/user.py`, `src/bot/handlers/start.py`",docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-ONB-002,"/menu, /help, /lang, /cancel must be available as shortcuts",P1,`src/bot/handlers/start.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-ONB-003,Blocked users must be stopped before handlers,P0,`src/bot/middlewares/user.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-ONB-004,Every update must receive the resolved user and language,P0,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-I18N-001,"Two catalogs (fa, en) must exist with identical key sets",P0,`src/localization/__init__.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-I18N-002,UI language must be switchable at runtime,P1,`src/bot/handlers/settings.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-I18N-003,Parity must be enforced automatically,P1,`tests/test_localization.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-I18N-004,AI reply language must be independent of UI language,P1,"`src/services/chat/prompts.py`, `src/utils/text.py`",docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-CHAT-001,A text message must produce an AI reply within the active conversation,P0,"`src/bot/handlers/chat.py`, `src/services/chat/engine.py`",docs/product/functional-requirements.md,T-01,AUTO,test_respond_persists_both_turns,no,
+FR-CHAT-002,Both turns must be persisted after success,P0,`src/services/chat/engine.py`,docs/product/functional-requirements.md,T-02,AUTO,test_engine_respects_max_context,no,
+FR-CHAT-003,Model output must be rendered as escaped Telegram HTML,P1,`src/utils/text.py`,docs/product/functional-requirements.md,T-03,AUTO,test_conversation_model_override,no,
+FR-CHAT-004,/retry must regenerate the last answer,P2,`src/services/chat/engine.py::regenerate`,docs/product/functional-requirements.md,T-06,GAP,,no,
+FR-CHAT-005,Long answers must be split,P1,"`src/bot/ui.py`, `src/utils/text.py`",docs/product/functional-requirements.md,T-08,GAP,,no,
+FR-CHAT-006,One user's requests must not interleave,P2,`src/bot/handlers/chat.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-LIM-001,A per-user sliding 60-second rate limit must apply,P1,`src/database/repositories/usage.py::check_rate`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-LIM-002,A per-user daily cap must apply,P1,`usage.py::daily_allowed`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-LIM-003,Every AI attempt must be logged,P1,`usage.py::log`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-LIM-004,Admins must see aggregates,P2,"`admin.py`, `usage.py::token_totals`",docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-TOOL-001,Summarize must offer 4 modes,P1,`src/services/tools/service.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-TOOL-002,Translate must support auto/fa/en,P1,same,docs/product/functional-requirements.md,T-05,AUTO,test_tool_run_does_not_write_history,no,
+FR-TOOL-003,Writing tool must offer 6 modes,P2,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-TOOL-004,Coding tool must offer 5 modes,P2,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-TOOL-005,Tool calls must not write conversation history,P1,"`engine.py::run_tool`, `tests/test_chat_engine.py`",docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-TOOL-006,Tool output must be language-consistent,P2,`tools/service.py::_run`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-PERS-001,Personality presets must be selectable,P1,`src/services/chat/prompts.py`,docs/product/functional-requirements.md,T-32,GAP,,no,
+FR-PERS-002,"Style, tone, creativity must be selectable",P1,same,docs/product/functional-requirements.md,T-04,AUTO,test_persona_instructions_reach_system_prompt,no,
+FR-PERS-003,Custom instructions must be stored per user,P2,`user_settings.custom_instructions`,docs/product/functional-requirements.md,T-33,GAP,,no,
+FR-PERS-004,A persona must override global instructions for a conversation,P2,`engine.py::_persona_instructions`,docs/product/functional-requirements.md,T-34,GAP,,no,
+FR-PERS-005,Emoji usage must be controllable,P3,`prompts.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-MEM-001,Facts must be stored per user with unique keys,P2,"`src/database/models/__init__.py`, `repositories/memory.py`",docs/product/functional-requirements.md,T-07,GAP,,no,
+FR-MEM-002,Memory must be injectable into the system prompt,P2,`prompts.py::build_system_prompt`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-MEM-003,Users must be able to toggle and clear memory,P2,`src/bot/handlers/memory.py`,docs/product/functional-requirements.md,T-09,GAP,,no,
+FR-CONV-001,Users must be able to create conversations,P0,`chats.py::create`,docs/product/functional-requirements.md,T-11,GAP,,no,
+FR-CONV-002,Users must be able to list and switch,P0,`chats.py::list_for_user`,docs/product/functional-requirements.md,T-12,GAP,,no,
+FR-CONV-003,Users must be able to rename,P2,`chats.py::rename`,docs/product/functional-requirements.md,T-13,AUTO,test_conversation_pin_persona_model_search,no,
+FR-CONV-004,Users must be able to pin/unpin,P3,`chats.py::set_pinned`,docs/product/functional-requirements.md,T-14,GAP,,no,
+FR-CONV-005,Users must be able to archive/unarchive,P2,`chats.py::set_archived`,docs/product/functional-requirements.md,T-15,GAP,,no,
+FR-CONV-006,Users must be able to delete with confirmation,P1,`chats.py::delete`,docs/product/functional-requirements.md,T-16,GAP,,no,
+FR-CONV-007,Users must be able to summarise,P2,`engine.py::summarize_conversation`,docs/product/functional-requirements.md,T-17,AUTO,test_conversation_pin_persona_model_search,no,
+FR-CONV-008,Users must be able to export,P3,`conversations.py::cb_export`,docs/product/functional-requirements.md,T-18,GAP,,no,
+FR-CONV-009,Users must be able to search their conversations,P3,`chats.py::search`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-MODEL-001,Models must be discoverable from the registry,P1,`src/services/ai/registry.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-MODEL-002,Selection precedence must be explicit,P1,`engine.py::_resolve_model`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-MODEL-003,Auto-routing must be heuristic and free,P2,`src/services/ai/router.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-MODEL-004,Provider health must be checkable,P3,`registry.py::health`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-PROMPT-001,Users must be able to save prompts with categories,P2,`repositories/prompts.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-PROMPT-002,Prompts must be runnable as one-shot instructions,P2,`src/bot/handlers/prompt_studio.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-PROMPT-003,Prompts must be editable and deletable,P3,`prompts.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-PROMPT-004,Categories must be listed,P3,`prompts.py::categories`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-GH-001,The bot must show the configured developer's GitHub profile,P3,`src/services/github/client.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-GH-002,The bot must list public repositories with pagination,P3,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-GH-003,Responses must be cached,P3,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-GH-004,Branding must be configurable and removable,P3,`src/bot/views.py`,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-ADMIN-001,/admin must be restricted to ADMIN_IDS,P1,`src/bot/handlers/admin.py`,docs/product/functional-requirements.md,T-22;T-23,GAP,,no,
+FR-ADMIN-002,Stats must be shown,P2,same,docs/product/functional-requirements.md,T-24,MANUAL,,no,
+FR-ADMIN-003,Providers must be manageable at runtime,P2,same,docs/product/functional-requirements.md,T-35,GAP,,no,
+FR-ADMIN-004,Users must be blockable,P1,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-ADMIN-005,Broadcast must reach all users safely,P2,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-ADMIN-006,Limits must be inspectable,P3,same,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-SEC-001,Every user-scoped read/mutate must verify ownership,P0,,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-SEC-002,Model output must never be trusted as markup,P1,,docs/product/functional-requirements.md,T-20;T-21,AUTO;GAP,test_conversation_and_messages_are_isolated,no,
+FR-SEC-003,Secrets must never be echoed to users or logs,P1,,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-SEC-004,Admin-only actions must re-check the caller,P1,,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-DB-001,Nine domain tables plus schema_version must exist,P0,,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-DB-002,Migrations must be additive and idempotent,P0,,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-DB-003,Deleting a user must cascade,P1,,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-DB-004,The SQLite parent directory must be created automatically,P1,,docs/product/functional-requirements.md,,NONE,,no,no test case references this requirement
+FR-CPERS-001,A user must be able to create a custom persona from text,P2,Missing `,docs/product/functional-requirements.md#16-custom-personas,,NONE,,no,no test case references this requirement
+FR-CPERS-002,Creating a persona with an existing name must update it,P2,`src/database/repositories/personas.py::create`,docs/product/functional-requirements.md#16-custom-personas,,NONE,,no,no test case references this requirement
+FR-CPERS-003,A persona must be importable and exportable as JSON,P3,"same handler, `cps:import` / `cps:exp`",docs/product/functional-requirements.md#16-custom-personas,,NONE,,no,no test case references this requirement
+FR-CPERS-004,A user must only see and change their own personas,P0,`personas.py::get/delete/update_instructions`,docs/product/functional-requirements.md#16-custom-personas,T-25,AUTO,test_persona_crud_and_default,no,
+FR-CPERS-005,The default persona and per-conversation assignment must be exclusive,P2,"`personas.py::set_default`, `conversations.set_persona`",docs/product/functional-requirements.md#16-custom-personas,,NONE,,no,no test case references this requirement

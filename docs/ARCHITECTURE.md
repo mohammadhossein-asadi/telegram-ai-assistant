@@ -1,5 +1,10 @@
 # Architecture
 
+> Summary page. Full detail: [system architecture](architecture/system-architecture.md),
+> [repository structure](architecture/repository-structure.md),
+> [technology stack](architecture/technology-stack.md), [ADRs](architecture/decisions/),
+> [diagrams](../artifacts/diagrams/system-context.mmd).
+
 ## Layers
 
 ```
@@ -65,8 +70,20 @@ rename, or delete another user's conversation by guessing an ID.
 ## Migrations
 
 `database/migrations.py` creates the schema on first boot and records applied
-versions in `schema_version`. It is intentionally lightweight; the model layer
-is Alembic-ready if a full migration toolchain is later required.
+versions in `schema_version` (currently `SCHEMA_VERSION = 2`). It is intentionally
+lightweight and additive — no down-migrations, no Alembic dependency. Trade-offs and
+the rules for adding v3: [migrations strategy](database/migrations-strategy.md) and
+[ADR-002](architecture/decisions/ADR-002-persistence-and-migrations.md).
+
+## Where to look next
+
+| Question | Document |
+| --- | --- |
+| How does one message travel end to end? | [chat sequence diagram](architecture/system-architecture.md), [`chat-sequence.mmd`](../artifacts/diagrams/chat-sequence.mmd) |
+| Which table stores what? | [data dictionary](database/data-dictionary.md) |
+| Which callbacks exist? | [bot interface](api/api-design.md), [`telegram-interface.json`](../artifacts/api/telegram-interface.json) |
+| What is the trust boundary? | [threat model](security/threat-model.md) |
+| What is actually tested? | [test plan](testing/test-plan.md) |
 
 ## Known trade-offs
 
@@ -76,3 +93,6 @@ is Alembic-ready if a full migration toolchain is later required.
   multiple bot processes. A Redis/DB bucket is the next step for horizontal scale.
 - FSM state uses aiogram's `MemoryStorage`; pending multi-step flows (rename,
   broadcast, provider add) are lost on restart.
+- No global error handler: an exception outside a handler's `try` is logged and the
+  update is dropped without user feedback.
+- `PRAGMA foreign_keys` stays off, so cascades are enforced by the ORM, not SQLite.

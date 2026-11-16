@@ -1,0 +1,17 @@
+%% Update pipeline — middleware order and dispatch.
+flowchart TD
+    A["getUpdates"] --> B["Dispatcher"]
+    B --> C["UserMiddleware<br/>upsert user, resolve lang, block gate"]
+    C --> D{"blocked?"}
+    D -->|"yes"| E["drop update (silent)"]
+    D -->|"no"| F["Router chain<br/>13 routers, chat last"]
+    F --> G["handler<br/>owns the callback namespace"]
+    G --> H["service<br/>ChatEngine / ToolService / …"]
+    H --> I["repository<br/>user_id-scoped queries"]
+    I --> J[("SQLite")]
+    H --> K["AIProvider"]
+    K --> L["provider HTTP API"]
+    L -->|"AIResponse"| H
+    H --> G
+    G --> M["bot/ui.safe_edit or send_long"]
+    M --> N["Telegram sendMessage / editMessageText"]

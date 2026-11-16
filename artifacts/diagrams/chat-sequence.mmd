@@ -1,0 +1,43 @@
+%% One chat turn, including the failure path.
+%% Limits are enforced in the handler (bot/handlers/chat.py), not in the engine.
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant H as chat handler
+    participant E as ChatEngine
+    participant R as repositories
+    participant P as AIProvider
+
+    U->>H: plain text message
+    H->>R: usage.check_rate(telegram_id)
+    alt per-minute limit hit
+        H-->>U: errors.rate_limited
+    else
+        H->>R: usage.daily_allowed(user.id)
+        alt daily limit hit
+            H-->>U: errors.daily_limited
+        else
+            H->>R: user_settings.get_or_create + conversations.get(current_id, user.id)
+            H->>E: respond(user, conversation, text)
+            E->>R: user_settings.get_or_create(user.id)
+            E->>R: memory.list_for_user (if memory_enabled)
+            E->>R: messages.recent(conv, MAX_CONTEXT_MESSAGES) (if memory_enabled)
+            E->>E: build_system_prompt (persona, style, tone, detected language, summary)
+            E->>E: registry.resolve + router (auto-routing vs manual override)
+            E->>P: chat(context, model, temperature)
+            alt provider failure
+                P-->>E: AIError / AITimeoutError / AIConfigurationError
+                E->>R: usage.log(success=false, error, latency_ms)
+                E-->>H: raise
+                H-->>U: errors.ai / errors.ai_timeout / chat.blocked / errors.generic
+            else success
+                P-->>E: AIResponse(text, model, provider, tokens)
+                E->>R: messages.add(user) then messages.add(assistant)
+                E->>R: conversations.touch
+                E->>R: usage.log(success=true, latency_ms, tokens)
+                E-->>H: AIResponse
+                H->>H: rename conversation from first user turn (derive_title)
+                H->>U: escape_html + markdown_to_html, chunked at 3500 chars
+            end
+        end
+    end

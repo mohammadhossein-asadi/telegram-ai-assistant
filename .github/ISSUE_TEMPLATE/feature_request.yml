@@ -1,0 +1,56 @@
+name: Feature request
+description: Suggest a capability or improvement
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This project is intentionally small (see `docs/product/product-dna.md`).
+        Describe the **problem**, not only the solution — a smaller change may solve it.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What can't you do today, and who is affected?
+      placeholder: "When I switch models mid-conversation, the previous context is kept but I cannot tell which model answered."
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Including "do nothing" and any workaround you already use.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - chat / context
+        - conversations
+        - personas / prompts
+        - memory
+        - models / providers
+        - tools
+        - settings / i18n
+        - developer screen
+        - admin
+        - deployment / ops
+        - documentation
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope acknowledgement
+      options:
+        - label: This does not require a web UI, HTTP API, or a new database
+          required: true
+        - label: I checked the roadmap (docs/product/product-roadmap.md) — this is not already planned
+          required: true
