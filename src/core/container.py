@@ -1,10 +1,15 @@
-"""Application-wide service container."""
+"""Application-wide service container.
+
+Handlers import ``container`` instead of receiving dependencies through
+aiogram's dispatcher data. This keeps signatures small while still allowing the
+entrypoint to construct everything once at startup.
+"""
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from core.config import Settings
     from database.base import Database
     from database.repositories import (

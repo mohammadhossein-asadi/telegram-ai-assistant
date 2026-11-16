@@ -16,6 +16,7 @@ from bot.handlers import (
     tools,
 )
 
+# Order matters: specific callback routers run before the generic chat fallback.
 ROUTERS = [
     start.router,
     personality.router,
