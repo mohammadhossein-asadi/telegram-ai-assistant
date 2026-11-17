@@ -16,8 +16,8 @@ Verified by running these commands in a Linux container with Python 3.12.
 ## 2. First-time setup
 
 ```bash
-git clone https://github.com/mohammadhossein-asadi/telegram-ai-assistant.git
-cd telegram-ai-assistant
+git clone https://github.com/mohammadhossein-asadi/MhaAiAssistantBot.git
+cd MhaAiAssistantBot
 
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate

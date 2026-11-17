@@ -35,8 +35,8 @@ No inbound ports. No reverse proxy. No TLS certificate.
 ## 3. Docker Compose deployment (recommended)
 
 ```bash
-git clone https://github.com/mohammadhossein-asadi/telegram-ai-assistant.git
-cd telegram-ai-assistant
+git clone https://github.com/mohammadhossein-asadi/MhaAiAssistantBot.git
+cd MhaAiAssistantBot
 
 cp .env.example .env
 chmod 600 .env
@@ -69,27 +69,27 @@ Verify in Telegram: `/start` → menu appears. `/admin` (as an admin id) → pan
 ## 4. Plain Docker
 
 ```bash
-docker build -t telegram-ai-assistant .
+docker build -t MhaAiAssistantBot .
 docker run -d --name bot \
   --restart unless-stopped \
   --env-file .env \
   -v "$PWD/data:/app/data" \
   -e DATABASE_URL="sqlite+aiosqlite:///./data/bot.db" \
-  telegram-ai-assistant
+MhaAiAssistantBot
 ```
 
 ## 5. Bare-metal / systemd
 
 ```ini
-# /etc/systemd/system/telegram-ai-assistant.service
+# /etc/systemd/system/MhaAiAssistantBot.service
 [Unit]
-Description=Telegram AI Assistant
+Description=MhaAiAssistantBot
 After=network-online.target
 
 [Service]
-WorkingDirectory=/opt/telegram-ai-assistant
-EnvironmentFile=/opt/telegram-ai-assistant/.env
-ExecStart=/opt/telegram-ai-assistant/.venv/bin/python run.py
+WorkingDirectory=/opt/MhaAiAssistantBot
+EnvironmentFile=/opt/MhaAiAssistantBot/.env
+ExecStart=/opt/MhaAiAssistantBot/.venv/bin/python run.py
 Restart=always
 User=botuser
 Group=botuser

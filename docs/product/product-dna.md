@@ -13,7 +13,7 @@
 | Product name (working title) | Telegram AI Assistant |
 | Persian display name | دستیار هوشمند (`BOT_NAME_FA` default in `src/core/config.py`) |
 | English display name | AI Assistant (`BOT_NAME_EN` default) |
-| Repository | `mohammadhossein-asadi/telegram-ai-assistant` |
+| Repository | `mohammadhossein-asadi/MhaAiAssistantBot` |
 | Distribution | Open source, MIT (see [`LICENSE`](../../LICENSE)), self-hosted |
 | Runtime surface | Telegram bot (long polling), text-only |
 | Languages | Persian (`fa`, RTL) and English (`en`, LTR), full parity |

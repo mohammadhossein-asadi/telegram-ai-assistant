@@ -57,5 +57,5 @@ Initial public state of the bot as it exists on `main`:
 - No account deletion; no encryption at rest.
 - No lint/type-check gate; no handler-level tests.
 
-[Unreleased]: https://github.com/mohammadhossein-asadi/telegram-ai-assistant/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/mohammadhossein-asadi/telegram-ai-assistant/releases/tag/v1.0.0
+[Unreleased]: https://github.com/mohammadhossein-asadi/MhaAiAssistantBot/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/mohammadhossein-asadi/MhaAiAssistantBot/releases/tag/v1.0.0

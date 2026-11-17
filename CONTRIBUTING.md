@@ -16,8 +16,8 @@ way to get a change merged is to keep it small too.
 ## 2. Setup
 
 ```bash
-git clone https://github.com/mohammadhossein-asadi/telegram-ai-assistant.git
-cd telegram-ai-assistant
+git clone https://github.com/mohammadhossein-asadi/MhaAiAssistantBot.git
+cd MhaAiAssistantBot
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 cp .env.example .env      # only needed to run the bot, not for tests

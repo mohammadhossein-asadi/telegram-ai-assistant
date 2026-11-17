@@ -96,6 +96,13 @@ async def _generate(message: Message, user, lang: str, conv, text: str, regenera
             await message.answer(t(lang, "errors.ai_timeout"))
             return
         except AIError as exc:
+            if exc.status == 402 and exc.detail and "wait_seconds" in exc.detail:
+                wait_seconds = exc.detail["wait_seconds"]
+                await message.answer(t(lang, "errors.ai_free_limit"))
+                return
+            if exc.status == 429:
+                await message.answer(t(lang, "errors.rate_limited"))
+                return
             await message.answer(t(lang, "errors.ai", detail=str(exc)[:300]))
             return
         except Exception as exc:  # noqa: BLE001 - last-resort guard

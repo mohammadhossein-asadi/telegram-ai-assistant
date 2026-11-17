@@ -1,11 +1,11 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/mohammadhossein-asadi/telegram-ai-assistant/security/advisories/new
+    url: https://github.com/mohammadhossein-asadi/MhaAiAssistantBot/security/advisories/new
     about: Report privately. Do not open a public issue for security problems.
   - name: Setup and usage help
-    url: https://github.com/mohammadhossein-asadi/telegram-ai-assistant/blob/main/docs/devops/development-environment.md
+    url: https://github.com/mohammadhossein-asadi/MhaAiAssistantBot/blob/main/docs/devops/development-environment.md
     about: Read the development environment and troubleshooting guide first.
   - name: Documentation
-    url: https://github.com/mohammadhossein-asadi/telegram-ai-assistant/blob/main/docs/index.md
+    url: https://github.com/mohammadhossein-asadi/MhaAiAssistantBot/blob/main/docs/index.md
     about: Product, architecture, database, testing and operations docs.

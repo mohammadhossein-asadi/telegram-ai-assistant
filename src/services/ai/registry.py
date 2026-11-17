@@ -4,6 +4,7 @@ from core.config import Settings
 from core.logging import get_logger
 from database.repositories import ProviderRepository
 from services.ai.openai_compat import OpenAICompatibleProvider
+from services.ai.pollinations import PollinationsProvider
 from services.ai.provider import AIProvider
 
 log = get_logger(__name__)
@@ -32,6 +33,9 @@ class ProviderRegistry:
             model=self.settings.ai_model,
         )
         self._cache[default.name] = default
+        # Add free Pollinations provider (no API key needed)
+        pollinations = PollinationsProvider()
+        self._cache[pollinations.name] = pollinations
         for row in await self.repo.list_active():
             provider = OpenAICompatibleProvider(
                 name=row.name,
@@ -48,6 +52,10 @@ class ProviderRegistry:
     def get(self, name: str | None) -> AIProvider:
         if name and name in self._cache:
             return self._cache[name]
+        # Prefer first configured provider
+        for provider in self._cache.values():
+            if provider.configured:
+                return provider
         return next(iter(self._cache.values()))
 
     def models(self) -> list[tuple[str, str]]:
@@ -61,11 +69,20 @@ class ProviderRegistry:
     def resolve(self, selected: str | None) -> tuple[AIProvider, str | None]:
         """Resolve a user's stored model string back to a provider + model."""
         if not selected:
-            provider = self.get(None)
+            # Prefer first configured provider
+            for provider in self._cache.values():
+                if provider.configured:
+                    return provider, None
+            # Fallback to first provider (may be unconfigured)
+            provider = next(iter(self._cache.values()))
             return provider, None
         for provider in self._cache.values():
-            if provider.model == selected:
+            if provider.model == selected and provider.configured:
                 return provider, selected
+        # Model not found or provider not configured - fallback to first configured
+        for provider in self._cache.values():
+            if provider.configured:
+                return provider, None
         provider = next(iter(self._cache.values()))
         return provider, selected
 

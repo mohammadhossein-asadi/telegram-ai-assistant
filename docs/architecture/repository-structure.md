@@ -7,7 +7,7 @@ in the target tree is aspirational application code.
 ## 1. Current tree (source of truth)
 
 ```text
-telegram-ai-assistant/
+MhaAiAssistantBot/
 ├── .env.example                 # every env var, empty placeholders only
 ├── .gitignore                   # ignores .env, data/, caches
 ├── Dockerfile                   # python:3.12-slim, PYTHONPATH=/app/src
@@ -100,7 +100,7 @@ telegram-ai-assistant/
 ## 2. Target tree (this documentation package added)
 
 ```text
-telegram-ai-assistant/
+MhaAiAssistantBot/
 ├── AGENTS.md                     # provider-neutral canonical instructions
 ├── CLAUDE.md  GEMINI.md          # thin adapters → AGENTS.md
 ├── CHANGELOG.md

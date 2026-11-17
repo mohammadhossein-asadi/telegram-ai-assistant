@@ -52,7 +52,7 @@ Larger and slower to restore, but survives schema-level tooling issues.
 
 ```bash
 # crontab -e (on the host)
-0 3 * * * cd /opt/telegram-ai-assistant && \
+0 3 * * * cd /opt/MhaAiAssistantBot && \
   docker compose exec -T bot sh -c 'sqlite3 /app/data/bot.db ".backup \"/app/data/daily.db\""' && \
   cp data/daily.db /backups/bot-$(date +\%F).db
 ```

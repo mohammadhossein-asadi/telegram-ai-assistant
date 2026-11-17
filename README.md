@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/release/python-3120/)
-[![GitHub stars](https://img.shields.io/github/stars/mohammadhossein-asadi/telegram-ai-assistant?style=social)](https://github.com/mohammadhossein-asadi/telegram-ai-assistant)
+[![GitHub stars](https://img.shields.io/github/stars/mohammadhossein-asadi/MhaAiAssistantBot?style=social)](https://github.com/mohammadhossein-asadi/MhaAiAssistantBot)
 [![Telegram Bot](https://img.shields.io/badge/Telegram-Bot-2CA5E0.svg)](https://telegram.org)
 
 ## 🤖 Overview
@@ -67,8 +67,8 @@ All UI strings are localized in `src/localization/en.json` and `src/localization
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/mohammadhossein-asadi/telegram-ai-assistant.git
-cd telegram-ai-assistant
+git clone https://github.com/mohammadhossein-asadi/MhaAiAssistantBot.git
+cd MhaAiAssistantBot
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -90,7 +90,7 @@ python run.py
 ## 📁 Project Structure
 
 ```
-telegram-ai-assistant/
+MhaAiAssistantBot/
 ├── src/                    # Source code
 │   ├── core/               # Config, logging, service container
 │   ├── database/           # SQLAlchemy models, migrations, repositories
@@ -188,4 +188,4 @@ For continuing development, see [HANDOFF.md](HANDOFF.md) - the source of truth f
 
 **Developer**: Mohammadhossein Asadi  
 **GitHub**: [@mohammadhossein-asadi](https://github.com/mohammadhossein-asadi)  
-**Project**: [telegram-ai-assistant](https://github.com/mohammadhossein-asadi/telegram-ai-assistant)
+**Project**: [MhaAiAssistantBot](https://github.com/mohammadhossein-asadi/MhaAiAssistantBot)

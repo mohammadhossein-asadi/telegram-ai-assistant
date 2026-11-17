@@ -23,9 +23,10 @@ class AIResponse:
 class AIError(Exception):
     """Raised for provider misconfiguration or upstream failures."""
 
-    def __init__(self, message: str, *, status: int | None = None) -> None:
+    def __init__(self, message: str, *, status: int | None = None, detail: Any = None) -> None:
         super().__init__(message)
         self.status = status
+        self.detail = detail
 
 
 class AIConfigurationError(AIError):

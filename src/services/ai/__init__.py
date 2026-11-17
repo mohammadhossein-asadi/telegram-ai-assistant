@@ -5,6 +5,7 @@ from services.ai.base import (
     AIResponse,
     AITimeoutError,
 )
+from services.ai.pollinations import PollinationsProvider
 from services.ai.provider import AIProvider
 from services.ai.registry import ProviderRegistry
 from services.ai.router import ModelRouter, classify_task
@@ -16,6 +17,7 @@ __all__ = [
     "AIError",
     "AIConfigurationError",
     "AITimeoutError",
+    "PollinationsProvider",
     "ProviderRegistry",
     "ModelRouter",
     "classify_task",

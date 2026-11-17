@@ -237,7 +237,9 @@
     "ai_config": "⚠️ AI is not configured. Missing API key.",
     "rate_limited": "⏳ Too many requests. Please wait a moment.",
     "daily_limited": "🚫 You reached today's request limit ({limit}).",
-    "generic": "⚠️ Unexpected error. Please try again."
+    "generic": "⚠️ Unexpected error. Please try again.",
+    "ai_rate_limited": "⏳ AI provider rate limit reached. Please wait {seconds} seconds and try again.",
+    "ai_free_limit": "🚫 Free tier limit reached: 1 request every 45 seconds. Please wait or upgrade for unlimited access."
   },
   "gh": {
     "title": "👨‍💻 {name}\n\n{role} | React & Next.js\nJavaScript | TypeScript | Python\n\n👥 {followers} followers · {following} following\n📦 {repos} public repositories",

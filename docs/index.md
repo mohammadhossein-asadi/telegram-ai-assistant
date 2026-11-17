@@ -1,6 +1,6 @@
 # Documentation
 
-Engineering documentation for **telegram-ai-assistant** — a Persian-first, bilingual
+Engineering documentation for **MhaAiAssistantBot** — a Persian-first, bilingual
 Telegram AI assistant (aiogram 3 · SQLAlchemy 2 async · SQLite · no HTTP API, no web UI).
 
 Start with the path that matches why you are here.

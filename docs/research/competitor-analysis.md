@@ -84,7 +84,7 @@ architecture (heavier modes, no documented persona/memory model).
 Free-tier + paid-credit products that provision a bot for the user. They win on
 setup effort; they lose on data ownership, key ownership and Persian UX control.
 Their existence is why the "self-host with your own key" story must be crisp.
-Source: <https://darkfactory.education/guides/telegram-ai-assistant> (third-party
+Source: <https://darkfactory.education/guides/MhaAiAssistantBot> (third-party
 survey, Sept 2026).
 
 ---
@@ -209,7 +209,7 @@ would require media pipelines this product has explicitly excluded.
 | S4 | <https://github.com/tbxark/ChatGPT-Telegram-Workers/blob/master/doc/en/CONFIG.md> | C2 provider protocols, admin panel scope | 2026-11-16 |
 | S5 | <https://github.com/tbxark/ChatGPT-Telegram-Workers/blob/master/doc/en/CHANGELOG.md> | C2 feature timeline (plugins, providers) | 2026-11-16 |
 | S6 | <https://avelina.ai/blog/best-personal-ai-agents-telegram-2026> | C3 summary, C1 staleness claim (third-party) | 2026-11-16 |
-| S7 | <https://darkfactory.education/guides/telegram-ai-assistant> | Hosted-product category context (third-party) | 2026-11-16 |
+| S7 | <https://darkfactory.education/guides/MhaAiAssistantBot> | Hosted-product category context (third-party) | 2026-11-16 |
 
 **Confidence:** licence, language and documented features for C1/C2 are
 high-confidence (primary repository pages). C3 attributes and all star counts are
